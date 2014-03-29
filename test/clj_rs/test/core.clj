@@ -15,3 +15,7 @@
              [1 1 0 0 1]
              [0 1 0 0 0]
              [1 0 0 0 1]])))))
+
+(deftest test-get-neighbouring-indecies
+  (is (= [[0 0] [0 1] [0 2] [1 0] [1 2] [2 0] [2 1] [2 2]]
+       (get-neighbouring-indecies 3 3 [1 1]))))
