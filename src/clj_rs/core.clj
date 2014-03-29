@@ -18,14 +18,16 @@
   [game-board]
   [(count game-board) (count (first game-board))])
 
+(defn get-value-at [game-matrix [row col]]
+  (-> game-matrix
+      (nth row)
+      (nth col)))
+
 (defn count-neighbours-at-pos
   [game-board pos]
   (apply +
-         (for [[row col]
-               (get-neighbouring-indecies (get-board-size game-board) pos)]
-           (-> game-board
-               (nth row)
-               (nth col)))))
+         (for [pos (get-neighbouring-indecies (get-board-size game-board) pos)]
+           (get-value-at game-board pos))))
 
 (defn get-neighbour-counts
   [game-board]
@@ -42,16 +44,21 @@
 (defn get-next-state [live neighbour-count]
   (cond
    (and (pos? live) (< neighbour-count 2)) 0 ;; under-population
-   (and (pos? live) (< neighbour-count 4)) 1     ;; survival
-   live 0                             ;; overcrowding
-   (= neighbour-count 3) 1            ;; reproduction
+   (and (pos? live) (< neighbour-count 4)) 1 ;; survival
+   (pos? live) 0                             ;; overcrowding
+   (= neighbour-count 3) 1                   ;; reproduction
    :else 0))
 
 (defn next-generation
   "Determine the next generation in the game of life"
   [game-board]
-  [[0 0 0 0 0]
-   [1 0 1 1 1]
-   [1 1 1 1 1]
-   [0 1 0 0 0]
-   [0 0 0 0 0]])
+  (let [[row-size col-size] (get-board-size game-board)
+        neighbour-counts (get-neighbour-counts game-board)]
+    (->> (for [row (range row-size)
+               col (range col-size)
+               :let [live (get-value-at game-board [row col])
+                     neighbour-count (get-value-at neighbour-counts [row col])]]
+           (get-next-state live neighbour-count))
+         (partition col-size)
+         (map vec)
+         vec)))
