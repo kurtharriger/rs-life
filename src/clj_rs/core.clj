@@ -1,6 +1,10 @@
 (ns clj-rs.core)
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn next-generation
+  "Determine the next generation in the game of life"
+  [game-board]
+  [[0 0 0 0 0]
+   [1 0 1 1 1]
+   [1 1 1 1 1]
+   [0 1 0 0 0]
+   [0 0 0 0 0]])
