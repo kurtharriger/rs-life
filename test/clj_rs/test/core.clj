@@ -29,3 +29,17 @@
   (testing "throws exception if initial position is not on board"
     (is (thrown? AssertionError
                  (get-neighbouring-indecies [3 3] [3 3])))))
+
+(deftest test-get-neighbour-count
+  (testing "example board"
+    (is (= [[1 2 2 3 2]
+            [2 5 4 5 3]
+            [3 5 5 5 3]
+            [3 3 4 3 2]
+            [1 1 1 0 0]]
+           (get-neighbour-counts
+            [[0 0 0 0 0]
+             [1 0 1 1 1]
+             [1 1 1 1 1]
+             [0 1 0 0 0]
+             [0 0 0 0 0]])))))
