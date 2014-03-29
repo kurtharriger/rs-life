@@ -1,6 +1,6 @@
-(ns clj-rs.test.core
+(ns rs-life.test.core
   (:require [clojure.test :refer :all]
-            [clj-rs.core :refer :all]))
+            [rs-life.core :refer :all]))
 
 (deftest test-life
   (testing "example board"

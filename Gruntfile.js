@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     
     watch: {
       all: {
-        files: ['public/**', '!public/cljs/*.cljs', '!public/bower_components/**'],
+        files: ['public/**', '!public/bower_components/**'],
 
         options: {
           livereload: true

@@ -1,4 +1,4 @@
-(ns clj-rs.core)
+(ns rs-life.core)
 
 (defn valid-index? [row-size col-size row col]
   (and (>= row 0) (>= col 0) (< row row-size) (< col col-size)))

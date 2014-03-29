@@ -9,3 +9,5 @@ pom.xml.asc
 /.nrepl-port
 node_modules/
 public/bower_components
+.idea/
+/public/cljs/
