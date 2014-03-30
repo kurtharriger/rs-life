@@ -37,12 +37,19 @@
            (fn [_ _ _ new-state]
              (render new-state)))
 
-(reset! game-state [[0 1 0 0 0]
-                    [1 0 0 1 1]
-                    [1 1 0 0 1]
-                    [0 1 0 0 0]
-                    [1 0 0 0 1]])
+(def start-state [[0 1 0 0 0]
+                     [1 0 0 1 1]
+                     [1 1 0 0 1]
+                     [0 1 0 0 0]
+                     [1 0 0 0 1]])
+
+(defn new-game []
+   (reset! game-state start-state))
+
+(.click  (js/$ ".game-reset") new-game)
 
 (go (while true
       (<! (async/timeout 1000))
       (swap! game-state next-generation)))
+
+(new-game)
